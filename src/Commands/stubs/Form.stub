@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Forms;
+
+use Rareloop\Lumberjack\Validation\AbstractForm;
+
+/**
+ * Class DummyForm
+ * @see https://github.com/Rareloop/lumberjack-validation#create-a-form-object
+ * @package App\Forms
+ */
+class DummyForm extends AbstractForm
+{
+    /**
+     * @var string[]
+     */
+    protected $rules = [
+        'name' => 'required',
+        'email' => 'required|email'
+    ];
+}

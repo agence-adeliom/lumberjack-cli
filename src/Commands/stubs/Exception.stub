@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Exceptions;
+
+use Exception;
+
+/**
+ * Class DummyException
+ * @package App\Exceptions
+ */
+class DummyException extends Exception
+{
+
+}

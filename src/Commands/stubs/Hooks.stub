@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Hooks;
+
+use Dugajean\WpHookAnnotations\Models\Action;
+use Dugajean\WpHookAnnotations\Models\Filter;
+use Dugajean\WpHookAnnotations\Models\Shortcode;
+
+/**
+ * Class DummyHooks
+ * @see https://github.com/dugajean/wp-hook-annotations#usage
+ * @package App\Hooks
+ */
+class DummyHooks {
+
+    /**
+     * @Action(tag="the_hook_name", priority=1, accepted_args=1)
+     * @Filter(tag="the_filter_name", priority=1, accepted_args=1)
+     * @Shortcode(tag="the_shortcode_name")
+     */
+    public static function foo(){}
+}

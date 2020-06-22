@@ -1,0 +1,74 @@
+<?php
+
+namespace App\PostTypes;
+
+
+use Adeliom\WP\Extensions\PostTypes\Post as BasePost;
+
+/**
+ * Class DummyPostType
+ * @package App\PostTypes
+ */
+class DummyPostType extends BasePost
+{
+    /**
+     * Return the key used to register the post type with WordPress
+     *
+     * @return string
+     */
+    public static function getPostType()
+    {
+        return 'dummy-post-name';
+    }
+
+    /**
+     * Overwrite the post slug when a post is saved
+     * https://github.com/mindkomm/types#register-post-types
+     *
+     * @return \Closure
+     */
+    protected static function getPostTypeCustomSlug()
+    {
+        return function ($post_slug, $post_data, $post_id) {
+            return $post_slug;
+        };
+    }
+
+    /**
+     * Return the config to use to register the post type with WordPress
+     * https://github.com/mindkomm/types#register-post-types
+     *
+     * @return array
+     */
+    protected static function getPostTypeConfig()
+    {
+        return [
+            'name_singular' => __('DummyPostType'),
+            'name_plural'   => __('DummyPlural'),
+            'args'          => [
+                /**
+                 * For a list of possible menu-icons see
+                 * https://developer.wordpress.org/resource/dashicons/
+                 */
+                'menu_icon'    => null,
+                'hierarchical' => false,
+                'has_archive'  => true,
+                'supports'     => [
+                    'title',
+                    'editor',
+                    'thumbnail',
+                    'author',
+                    'revisions',
+                ],
+                // Whether post is accessible in the frontend
+                'public'       => true,
+                'rewrite' => [
+                    'slug' => 'dummy-slug',
+                ],
+            ],
+            'admin_columns' => [
+                'date' => false, // Disable date in list view
+            ],
+        ];
+    }
+}

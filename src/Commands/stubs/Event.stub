@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Events;
+
+use Adeliom\WP\Extensions\Events\AbstractEvent;
+
+/**
+ * Class DummyEvent
+ * @package App\Events
+ */
+class DummyEvent extends AbstractEvent
+{
+    /**
+     * @return string
+     */
+    public static function getEvent() : string
+    {
+        return "dummy-event";
+    }
+
+    /**
+     *
+     */
+    public static function handle() : void
+    {
+        // TODO: Implement handle() method.
+    }
+
+}

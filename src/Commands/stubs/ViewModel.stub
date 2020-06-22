@@ -1,0 +1,18 @@
+<?php
+
+namespace App\ViewModels;
+
+use Rareloop\Lumberjack\ViewModel;
+
+/**
+ * Class DummyViewModel
+ * @see https://docs.lumberjack.rareloop.com/the-basics/view-models
+ * @package App\ViewModels
+ */
+class DummyViewModel extends ViewModel
+{
+    public function __construct()
+    {
+
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "name": "adeliom/wp-cli",
+    "description": "",
+    "keywords": [
+        "aritti",
+        "adeliom-wp-cli"
+    ],
+    "homepage": "https://github.com/adeliom/wp-cli",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Arnaud Ritti",
+            "email": "ari@adeliom.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "blast/facades": "^1.0",
+        "rareloop/lumberjack-core": "^4.3",
+        "symfony/console": "^4.1",
+        "icanboogie/inflector": "^2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\WP\\CLI\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Adeliom\\WP\\CLI\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

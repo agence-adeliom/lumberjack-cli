@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Taxonomy;
+
+use Adeliom\WP\Extensions\PostTypes\Term as BaseTaxonomy;
+
+class DummyTaxonomy extends BaseTaxonomy
+{
+    /**
+     * Return the key used to register the taxonomy with WordPress
+     *
+     * @return string
+     */
+    public static function getTerm()
+    {
+        return 'dummy-taxonomy';
+    }
+
+    /**
+     * Return the config to use to register the taxonomy with WordPress
+     *
+     * https://github.com/mindkomm/types#register-taxonomies
+     *
+     * @return array
+     */
+    protected static function getTaxonomyConfig()
+    {
+        return [
+            'name_singular'  => __('DummyTaxonomy'),
+            'name_plural'    => __('DummyPlural'),
+            // For which post types do you want to register this taxonomy?
+            'for_post_types' => [ 'post' ],
+            'args'           => [
+                // Hide the meta box from the edit view
+                // 'meta_box_cb' => false,
+                //
+                // Make it selectable in the navigation menus
+                // 'show_in_nav_menus' => true,
+            ],
+        ];
+    }
+}

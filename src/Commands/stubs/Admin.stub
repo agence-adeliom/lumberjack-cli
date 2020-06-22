@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Admin;
+
+use Adeliom\WP\Extensions\Admin\AbstractAdmin;
+use WordPlate\Acf\Fields\Text;
+use WordPlate\Acf\Location;
+
+/**
+ * Class DummyAdmin
+ * @package App\Admin
+ */
+class DummyAdmin extends AbstractAdmin
+{
+    /**
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+        return 'Dummy';
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#fields
+     * @return \Traversable
+     */
+    public static function getFields(): \Traversable
+    {
+        yield Text::make('Title');
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#location
+     * @return \Traversable
+     */
+    public static function getLocation(): \Traversable
+    {
+        yield Location::if('post_type', 'page');
+    }
+}
