@@ -32,7 +32,7 @@ $lumberjack->bootstrap();
 // Import our routes file
 require_once("routes.php");
 
-$hatchet = $app->make(Adeliom\WP\CLI::class);
+$hatchet = $app->make(Adeliom\WP\CLI\CLI::class);
 $hatchet->bootstrap();
 
 // Execute the current command

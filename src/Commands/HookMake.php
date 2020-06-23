@@ -3,7 +3,6 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
-use Adeliom\WP\CLI\Parser;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

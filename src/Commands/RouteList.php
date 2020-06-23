@@ -3,11 +3,9 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
-use Rareloop\Router\Router;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 class RouteList extends Command
 {

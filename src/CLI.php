@@ -3,16 +3,15 @@
 namespace Adeliom\WP\CLI;
 
 use Adeliom\WP\CLI\Commands\AdminMake;
-use Adeliom\WP\CLI\Commands\EnvMake;
-use Adeliom\WP\CLI\Commands\EventMake;
-use Adeliom\WP\CLI\Commands\FormMake;
-use Adeliom\WP\CLI\Commands\HookMake;
-use Adeliom\WP\CLI\Commands\LayoutMake;
-use DI\ContainerBuilder;
 use Adeliom\WP\CLI\Commands\AjaxMake;
 use Adeliom\WP\CLI\Commands\ControllerMake;
 use Adeliom\WP\CLI\Commands\CronMake;
+use Adeliom\WP\CLI\Commands\EnvMake;
+use Adeliom\WP\CLI\Commands\EventMake;
 use Adeliom\WP\CLI\Commands\ExceptionMake;
+use Adeliom\WP\CLI\Commands\FormMake;
+use Adeliom\WP\CLI\Commands\HookMake;
+use Adeliom\WP\CLI\Commands\LayoutMake;
 use Adeliom\WP\CLI\Commands\PostTypeMake;
 use Adeliom\WP\CLI\Commands\RouteList;
 use Adeliom\WP\CLI\Commands\ServiceProviderMake;

@@ -6,12 +6,8 @@ use Exception;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Rareloop\Lumberjack\Exceptions\Handler as LumberjackHandler;
-use Rareloop\Lumberjack\Facades\Config;
-use Rareloop\Lumberjack\Facades\Log;
-use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Timber\Timber;
 use Zend\Diactoros\Response\EmptyResponse;
 
 class Handler extends LumberjackHandler
