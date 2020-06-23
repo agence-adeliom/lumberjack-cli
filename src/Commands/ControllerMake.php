@@ -3,6 +3,7 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
+use Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -25,14 +26,14 @@ class ControllerMake extends MakeFromStubCommand
         $stub = file_get_contents(__DIR__ . '/stubs/Controller.stub');
         $stub = str_replace('DummyController', $name, $stub);
 
-        $this->createFile('app/Http/Controllers/'.$name.'.php', $stub);
+        $this->createFile('app/Http/Controllers/' . $name . '.php', $stub);
 
         try {
-            $this->createFile('app/Http/Controllers/'.$name.'.php', $stub);
-            $io->success('The Controller  "'.$name.'" was created. - File : ' . 'app/Http/Controllers/'.$name.'.php');
+            $this->createFile('app/Http/Controllers/' . $name . '.php', $stub);
+            $io->success('The Controller  "' . $name . '" was created. - File : ' . 'app/Http/Controllers/' . $name . '.php');
 
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }

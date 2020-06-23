@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
+use Exception;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,7 +29,7 @@ class EventMake extends MakeFromStubCommand
 
         $name .= "Event";
 
-        $helper = new QuestionHelper;
+        $helper   = new QuestionHelper;
         $question = new ConfirmationQuestion('<info>Register Event Listener from Config? (y/n)</info> [default: y] ');
         $register = $helper->ask($input, $output, $question);
 
@@ -37,15 +38,15 @@ class EventMake extends MakeFromStubCommand
         $stub = str_replace('dummy-event', $slug, $stub);
 
         try {
-            $this->createFile('app/Events/'.$name.'.php', $stub);
-            $io->success('The Event Listener  "'.$name.'" was created. - File : ' . 'app/Events/'.$name.'.php');
+            $this->createFile('app/Events/' . $name . '.php', $stub);
+            $io->success('The Event Listener  "' . $name . '" was created. - File : ' . 'app/Events/' . $name . '.php');
 
             if ($register) {
                 $this->registerEventListenerInConfig($name);
-                $io->success('The Event Listener "'.$name.'" was registred in config file : ' . $this->app->basePath() . '/config/events.php');
+                $io->success('The Event Listener "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/events.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -54,8 +55,8 @@ class EventMake extends MakeFromStubCommand
     protected function registerEventListenerInConfig($name)
     {
         $configPath = $this->app->basePath() . '/config/events.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'listener' => [", "'listener' => [\n\t\tApp\Events\\".$name."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'listener' => [", "'listener' => [\n\t\tApp\Events\\" . $name . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\FlexibleLayout;
 
 use Adeliom\WP\Extensions\FlexibleLayout\AbstractLayout;
+use Traversable;
 use WordPlate\Acf\Fields\Text;
 
 /**
@@ -29,9 +30,9 @@ class DummyLayout extends AbstractLayout
     }
 
     /**
-     * @return \Traversable
+     * @return Traversable
      */
-    public static function getFields(): \Traversable
+    public static function getFields(): Traversable
     {
         yield Text::make('Title');
     }

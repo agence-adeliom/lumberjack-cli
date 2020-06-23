@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
+use Exception;
 use ICanBoogie\Inflector;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,18 +26,18 @@ class TaxonomyMake extends MakeFromStubCommand
         $io->title('Create a new Taxonomy');
 
         $singular = $input->getArgument('name');
-        $plural = Inflector::get('en')->pluralize($singular);
-        $name = Parser::slugify($singular);
+        $plural   = Inflector::get('en')->pluralize($singular);
+        $name     = Parser::slugify($singular);
 
         $helper = new QuestionHelper;
 
-        $question = new Question('<info>Plural</info> [default: '.$plural.'] ', $plural);
-        $plural = $helper->ask($input, $output, $question);
+        $question = new Question('<info>Plural</info> [default: ' . $plural . '] ', $plural);
+        $plural   = $helper->ask($input, $output, $question);
 
-        $question = new Question('<info>WordPress Taxonomy Name</info> [default: '.$name.'] ', $name);
-        $name = $helper->ask($input, $output, $question);
+        $question = new Question('<info>WordPress Taxonomy Name</info> [default: ' . $name . '] ', $name);
+        $name     = $helper->ask($input, $output, $question);
 
-        $question = new ConfirmationQuestion('<info>Register Taxonomy from Config? (y/n)</info> [default: y] ');
+        $question         = new ConfirmationQuestion('<info>Register Taxonomy from Config? (y/n)</info> [default: y] ');
         $registerTaxonomy = $helper->ask($input, $output, $question);
 
         $stub = file_get_contents(__DIR__ . '/stubs/Taxonomy.stub');
@@ -45,14 +46,14 @@ class TaxonomyMake extends MakeFromStubCommand
         $stub = str_replace('DummyPlural', $plural, $stub);
 
         try {
-            $this->createFile('app/Taxonomy/'.$singular.'.php', $stub);
-            $io->success('The Taxonomy "'.$singular.'" was created. - File : ' . 'app/Taxonomy/'.$singular.'.php');
+            $this->createFile('app/Taxonomy/' . $singular . '.php', $stub);
+            $io->success('The Taxonomy "' . $singular . '" was created. - File : ' . 'app/Taxonomy/' . $singular . '.php');
             if ($registerTaxonomy) {
                 $this->registerTaxonomyInConfig($singular);
-                $io->success('The Taxonomy "'.$singular.'" was registred in config file : ' . $this->app->basePath() . '/config/taxonomies.php');
+                $io->success('The Taxonomy "' . $singular . '" was registred in config file : ' . $this->app->basePath() . '/config/taxonomies.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -61,8 +62,8 @@ class TaxonomyMake extends MakeFromStubCommand
     protected function registerTaxonomyInConfig($singular)
     {
         $configPath = $this->app->basePath() . '/config/taxonomies.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'register' => [", "'register' => [\n\t\tApp\Taxonomy\\".$singular."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'register' => [", "'register' => [\n\t\tApp\Taxonomy\\" . $singular . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

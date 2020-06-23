@@ -13,10 +13,10 @@ class Parser
     /**
      * Parse the given console command definition into an array.
      *
-     * @param  string  $expression
+     * @param string $expression
      * @return array
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function parse($expression)
     {
@@ -34,7 +34,7 @@ class Parser
     /**
      * Extract the name of the command from the expression.
      *
-     * @param  string  $expression
+     * @param string $expression
      * @return string
      */
     protected static function name($expression)
@@ -43,7 +43,7 @@ class Parser
             throw new InvalidArgumentException('Console command definition is empty.');
         }
 
-        if (! preg_match('/[^\s]+/', $expression, $matches)) {
+        if (!preg_match('/[^\s]+/', $expression, $matches)) {
             throw new InvalidArgumentException('Unable to determine command name from signature.');
         }
 
@@ -53,7 +53,7 @@ class Parser
     /**
      * Extract all of the parameters from the tokens.
      *
-     * @param  array  $tokens
+     * @param array $tokens
      * @return array
      */
     protected static function parameters(array $tokens)
@@ -74,36 +74,10 @@ class Parser
     }
 
     /**
-     * Parse an argument expression.
-     *
-     * @param  string  $token
-     * @return \Symfony\Component\Console\Input\InputArgument
-     */
-    protected static function parseArgument($token)
-    {
-        list($token, $description) = static::extractDescription($token);
-
-        switch (true) {
-            case Stringy::create($token)->endsWith('?*'):
-                return new InputArgument(trim($token, '?*'), InputArgument::IS_ARRAY, $description);
-            case Stringy::create($token)->endsWith('*'):
-                return new InputArgument(trim($token, '*'), InputArgument::IS_ARRAY | InputArgument::REQUIRED, $description);
-            case Stringy::create($token)->endsWith('?'):
-                return new InputArgument(trim($token, '?'), InputArgument::OPTIONAL, $description);
-            case preg_match('/(.+)\=\*(.+)/', $token, $matches):
-                return new InputArgument($matches[1], InputArgument::IS_ARRAY, $description, preg_split('/,\s?/', $matches[2]));
-            case preg_match('/(.+)\=(.+)/', $token, $matches):
-                return new InputArgument($matches[1], InputArgument::OPTIONAL, $description, $matches[2]);
-            default:
-                return new InputArgument($token, InputArgument::REQUIRED, $description);
-        }
-    }
-
-    /**
      * Parse an option expression.
      *
-     * @param  string  $token
-     * @return \Symfony\Component\Console\Input\InputOption
+     * @param string $token
+     * @return InputOption
      */
     protected static function parseOption($token)
     {
@@ -113,7 +87,7 @@ class Parser
 
         if (isset($matches[1])) {
             $shortcut = $matches[0];
-            $token = $matches[1];
+            $token    = $matches[1];
         } else {
             $shortcut = null;
         }
@@ -135,7 +109,7 @@ class Parser
     /**
      * Parse the token into its token and description segments.
      *
-     * @param  string  $token
+     * @param string $token
      * @return array
      */
     protected static function extractDescription($token)
@@ -143,6 +117,32 @@ class Parser
         $parts = preg_split('/\s+:\s+/', trim($token), 2);
 
         return count($parts) === 2 ? $parts : [$token, ''];
+    }
+
+    /**
+     * Parse an argument expression.
+     *
+     * @param string $token
+     * @return InputArgument
+     */
+    protected static function parseArgument($token)
+    {
+        list($token, $description) = static::extractDescription($token);
+
+        switch (true) {
+            case Stringy::create($token)->endsWith('?*'):
+                return new InputArgument(trim($token, '?*'), InputArgument::IS_ARRAY, $description);
+            case Stringy::create($token)->endsWith('*'):
+                return new InputArgument(trim($token, '*'), InputArgument::IS_ARRAY | InputArgument::REQUIRED, $description);
+            case Stringy::create($token)->endsWith('?'):
+                return new InputArgument(trim($token, '?'), InputArgument::OPTIONAL, $description);
+            case preg_match('/(.+)\=\*(.+)/', $token, $matches):
+                return new InputArgument($matches[1], InputArgument::IS_ARRAY, $description, preg_split('/,\s?/', $matches[2]));
+            case preg_match('/(.+)\=(.+)/', $token, $matches):
+                return new InputArgument($matches[1], InputArgument::OPTIONAL, $description, $matches[2]);
+            default:
+                return new InputArgument($token, InputArgument::REQUIRED, $description);
+        }
     }
 
     public static function slugify($string, $delimiter = '-')

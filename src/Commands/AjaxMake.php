@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
+use Exception;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,16 +39,16 @@ class AjaxMake extends MakeFromStubCommand
 
 
         try {
-            $this->createFile('app/Actions/'.$name.'.php', $stub);
-            $io->success('The Ajax action  "'.$name.'" was created. - File : ' . 'app/Actions/'.$name.'.php');
+            $this->createFile('app/Actions/' . $name . '.php', $stub);
+            $io->success('The Ajax action  "' . $name . '" was created. - File : ' . 'app/Actions/' . $name . '.php');
 
             if ($register) {
                 $this->registerAjaxActionInConfig($name);
-                $io->success('The Ajax action  "'.$name.'" was registred in config file : ' . $this->app->basePath() . '/config/actions.php');
+                $io->success('The Ajax action  "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/actions.php');
             }
 
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -56,8 +57,8 @@ class AjaxMake extends MakeFromStubCommand
     protected function registerAjaxActionInConfig($name)
     {
         $configPath = $this->app->basePath() . '/config/actions.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'register' => [", "'register' => [\n\t\tApp\Actions\\".$name."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'register' => [", "'register' => [\n\t\tApp\Actions\\" . $name . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

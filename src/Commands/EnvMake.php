@@ -25,8 +25,8 @@ class EnvMake extends MakeFromStubCommand
         $stub = file_get_contents(__DIR__ . '/stubs/environment.stub');
         $stub = str_replace('dummy-env', $name, $stub);
 
-        $this->createFile('../../../../config/environments/'.$name.'.php', $stub);
-        $io->success('The environement  "'.$name.'" was created.');
+        $this->createFile('../../../../config/environments/' . $name . '.php', $stub);
+        $io->success('The environement  "' . $name . '" was created.');
 
         return 1;
     }

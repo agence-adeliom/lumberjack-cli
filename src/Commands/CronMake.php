@@ -3,6 +3,7 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
+use Exception;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,15 +33,15 @@ class CronMake extends MakeFromStubCommand
 
 
         try {
-            $this->createFile('app/Crons/'.$name.'.php', $stub);
-            $io->success('The Cron Job  "'.$name.'" was created. - File : ' . 'app/Crons/'.$name.'.php');
+            $this->createFile('app/Crons/' . $name . '.php', $stub);
+            $io->success('The Cron Job  "' . $name . '" was created. - File : ' . 'app/Crons/' . $name . '.php');
 
             if ($register) {
                 $this->registerCronJobInConfig($name);
-                $io->success('The Cron Job "'.$name.'" was registred in config file : ' . $this->app->basePath() . '/config/crons.php');
+                $io->success('The Cron Job "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/crons.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -49,8 +50,8 @@ class CronMake extends MakeFromStubCommand
     protected function registerCronJobInConfig($name)
     {
         $configPath = $this->app->basePath() . '/config/crons.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'register' => [", "'register' => [\n\t\tApp\Crons\\".$name."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'register' => [", "'register' => [\n\t\tApp\Crons\\" . $name . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

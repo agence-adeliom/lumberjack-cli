@@ -3,6 +3,7 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
+use Exception;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,14 +34,14 @@ class HookMake extends MakeFromStubCommand
         $stub = str_replace('DummyHooks', $name, $stub);
 
         try {
-            $this->createFile('app/Hooks/'.$name.'.php', $stub);
-            $io->success('The Hook Class  "'.$name.'" was created. - File : ' . 'app/Hooks/'.$name.'.php');
+            $this->createFile('app/Hooks/' . $name . '.php', $stub);
+            $io->success('The Hook Class  "' . $name . '" was created. - File : ' . 'app/Hooks/' . $name . '.php');
             if ($register) {
                 $this->registerHookInConfig($name);
-                $io->success('The Hook Class "'.$name.'" was registred in config file : ' . $this->app->basePath() . '/config/hooks.php');
+                $io->success('The Hook Class "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/hooks.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -49,8 +50,8 @@ class HookMake extends MakeFromStubCommand
     protected function registerHookInConfig($name)
     {
         $configPath = $this->app->basePath() . '/config/hooks.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'register' => [", "'register' => [\n\t\tApp\Hooks\\".$name."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'register' => [", "'register' => [\n\t\tApp\Hooks\\" . $name . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

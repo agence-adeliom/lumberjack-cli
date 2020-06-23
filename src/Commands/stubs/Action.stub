@@ -19,7 +19,8 @@ class DummyAction extends BaseAction
     /**
      * @return mixed|void
      */
-    protected function run(){
+    protected function run()
+    {
 
         // Your Code Here!
 

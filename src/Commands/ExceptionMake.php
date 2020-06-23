@@ -3,6 +3,7 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
+use Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -27,10 +28,10 @@ class ExceptionMake extends MakeFromStubCommand
         $stub = str_replace('DummyException', $name, $stub);
 
         try {
-            $this->createFile('app/Exceptions/'.$name.'.php', $stub);
-            $io->success('The Event Listener  "'.$name.'" was created. - File : ' . 'app/Events/'.$name.'.php');
+            $this->createFile('app/Exceptions/' . $name . '.php', $stub);
+            $io->success('The Event Listener  "' . $name . '" was created. - File : ' . 'app/Events/' . $name . '.php');
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }

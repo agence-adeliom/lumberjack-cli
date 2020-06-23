@@ -19,7 +19,7 @@ class Handler extends LumberjackHandler
         parent::report($e);
     }
 
-    public function render(ServerRequestInterface $request, Exception $e) : ResponseInterface
+    public function render(ServerRequestInterface $request, Exception $e): ResponseInterface
     {
         (new ConsoleApplication)->renderException($e, new ConsoleOutput);
 

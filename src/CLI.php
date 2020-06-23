@@ -27,8 +27,6 @@ use Symfony\Component\Console\Application as ConsoleApplication;
 
 class CLI
 {
-    private $app;
-
     protected $bootstrappers = [
         RegisterExceptionHandler::class,
         LoadConfiguration::class,
@@ -37,7 +35,6 @@ class CLI
         BootProviders::class,
         RegisterCommands::class,
     ];
-
     protected $defaultCommands = [
         ControllerMake::class,
         ExceptionMake::class,
@@ -55,10 +52,11 @@ class CLI
         AdminMake::class,
         LayoutMake::class
     ];
+    private $app;
 
     public function __construct(Application $app)
     {
-        $this->app = $app;
+        $this->app        = $app;
         $this->consoleApp = $this->app->make(ConsoleApplication::class, ['name' => 'Adeliom WP - Lumberjack CLI']);
 
         $this->app->bind(WP::class, $this);
@@ -81,9 +79,9 @@ class CLI
         }
     }
 
-    public function run()
+    public function defaultCommands()
     {
-        $this->consoleApp->run();
+        return $this->defaultCommands;
     }
 
     protected function bootstrappers()
@@ -91,13 +89,13 @@ class CLI
         return $this->bootstrappers;
     }
 
+    public function run()
+    {
+        $this->consoleApp->run();
+    }
+
     public function console()
     {
         return $this->consoleApp;
-    }
-
-    public function defaultCommands()
-    {
-        return $this->defaultCommands;
     }
 }

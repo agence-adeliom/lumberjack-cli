@@ -11,12 +11,15 @@ use Dugajean\WpHookAnnotations\Models\Shortcode;
  * @see https://github.com/dugajean/wp-hook-annotations#usage
  * @package App\Hooks
  */
-class DummyHooks {
+class DummyHooks
+{
 
     /**
      * @Action(tag="the_hook_name", priority=1, accepted_args=1)
      * @Filter(tag="the_filter_name", priority=1, accepted_args=1)
      * @Shortcode(tag="the_shortcode_name")
      */
-    public static function foo(){}
+    public static function foo()
+    {
+    }
 }

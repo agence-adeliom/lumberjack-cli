@@ -14,15 +14,16 @@ class DummyCron extends BaseCron
      * @var int[]
      */
     public $every = [
-        'seconds'   => 0,
-        'minutes'   => 0,
-        'hours'     => 1,
+        'seconds' => 0,
+        'minutes' => 0,
+        'hours' => 1,
     ];
 
     /**
      * Function to execute
      */
-    protected function handle(){
+    protected function handle()
+    {
 
         // Your Code Here!
 

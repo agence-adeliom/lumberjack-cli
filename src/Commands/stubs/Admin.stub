@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use Adeliom\WP\Extensions\Admin\AbstractAdmin;
+use Traversable;
 use WordPlate\Acf\Fields\Text;
 use WordPlate\Acf\Location;
 
@@ -22,18 +23,18 @@ class DummyAdmin extends AbstractAdmin
 
     /**
      * @see https://github.com/wordplate/extended-acf#fields
-     * @return \Traversable
+     * @return Traversable
      */
-    public static function getFields(): \Traversable
+    public static function getFields(): Traversable
     {
         yield Text::make('Title');
     }
 
     /**
      * @see https://github.com/wordplate/extended-acf#location
-     * @return \Traversable
+     * @return Traversable
      */
-    public static function getLocation(): \Traversable
+    public static function getLocation(): Traversable
     {
         yield Location::if('post_type', 'page');
     }

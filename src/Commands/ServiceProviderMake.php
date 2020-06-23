@@ -3,6 +3,7 @@
 
 namespace Adeliom\WP\CLI\Commands;
 
+use Exception;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,14 +34,14 @@ class ServiceProviderMake extends MakeFromStubCommand
         $stub = str_replace('DummyServiceProvider', $name, $stub);
 
         try {
-            $this->createFile('app/Providers/'.$name.'.php', $stub);
-            $io->success('The Providers "'.$name.'" was created. - File : ' . 'app/Providers/'.$name.'.php');
+            $this->createFile('app/Providers/' . $name . '.php', $stub);
+            $io->success('The Providers "' . $name . '" was created. - File : ' . 'app/Providers/' . $name . '.php');
             if ($register) {
                 $this->registerServiceProviderInConfig($name);
-                $io->success('The Providers "'.$name.'" was registred in config file : ' . $this->app->basePath() . '/config/app.php');
+                $io->success('The Providers "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/app.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -49,8 +50,8 @@ class ServiceProviderMake extends MakeFromStubCommand
     protected function registerServiceProviderInConfig($name)
     {
         $configPath = $this->app->basePath() . '/config/app.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'providers' => [", "'providers' => [\n\t\tApp\Providers\\".$name."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'providers' => [", "'providers' => [\n\t\tApp\Providers\\" . $name . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

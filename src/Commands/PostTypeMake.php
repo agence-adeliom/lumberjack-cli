@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
+use Exception;
 use ICanBoogie\Inflector;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,27 +21,26 @@ class PostTypeMake extends MakeFromStubCommand
     protected $description = 'Create a PostType';
 
 
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Create a new PostType');
 
         $singular = $input->getArgument('name');
-        $plural = Inflector::get('en')->pluralize($singular);
-        $name = Parser::slugify($singular);
-        $slug = Parser::slugify($singular);
+        $plural   = Inflector::get('en')->pluralize($singular);
+        $name     = Parser::slugify($singular);
+        $slug     = Parser::slugify($singular);
 
         $helper = new QuestionHelper;
 
-        $question = new Question('<info>Plural</info> [default: '.$plural.'] ', $plural);
-        $plural = $helper->ask($input, $output, $question);
+        $question = new Question('<info>Plural</info> [default: ' . $plural . '] ', $plural);
+        $plural   = $helper->ask($input, $output, $question);
 
-        $question = new Question('<info>WordPress Post Name</info> [default: '.$name.'] ', $name);
-        $name = $helper->ask($input, $output, $question);
+        $question = new Question('<info>WordPress Post Name</info> [default: ' . $name . '] ', $name);
+        $name     = $helper->ask($input, $output, $question);
 
-        $question = new Question('<info>Slug</info> [default: '.$slug.'] ', $slug);
-        $slug = $helper->ask($input, $output, $question);
+        $question = new Question('<info>Slug</info> [default: ' . $slug . '] ', $slug);
+        $slug     = $helper->ask($input, $output, $question);
 
         $features = [
             'Content Editor',
@@ -56,7 +56,7 @@ class PostTypeMake extends MakeFromStubCommand
         $question->setMultiselect(true);
         $featuresSelected = $helper->ask($input, $output, $question);
 
-        $question = new ConfirmationQuestion('<info>Register PostType from Config? (y/n)</info> [default: y] ');
+        $question         = new ConfirmationQuestion('<info>Register PostType from Config? (y/n)</info> [default: y] ');
         $registerPostType = $helper->ask($input, $output, $question);
 
         $stub = file_get_contents(__DIR__ . '/stubs/PostType.stub');
@@ -82,14 +82,14 @@ class PostTypeMake extends MakeFromStubCommand
         }
 
         try {
-            $this->createFile('app/PostTypes/'.$singular.'.php', $stub);
-            $io->success('The PostTypes "'.$singular.'" was created. - File : ' . 'app/PostTypes/'.$singular.'.php');
+            $this->createFile('app/PostTypes/' . $singular . '.php', $stub);
+            $io->success('The PostTypes "' . $singular . '" was created. - File : ' . 'app/PostTypes/' . $singular . '.php');
             if ($registerPostType) {
                 $this->registerPostTypeInConfig($singular);
-                $io->success('The PostTypes "'.$singular.'" was registred in config file : ' . $this->app->basePath() . '/config/posttypes.php');
+                $io->success('The PostTypes "' . $singular . '" was registred in config file : ' . $this->app->basePath() . '/config/posttypes.php');
             }
             return 1;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $io->error($e->getMessage());
             return 0;
         }
@@ -98,8 +98,8 @@ class PostTypeMake extends MakeFromStubCommand
     protected function registerPostTypeInConfig($singular)
     {
         $configPath = $this->app->basePath() . '/config/posttypes.php';
-        $config = file_get_contents($configPath);
-        $config = str_replace("'register' => [", "'register' => [\n\t\tApp\PostTypes\\".$singular."::class,", $config);
+        $config     = file_get_contents($configPath);
+        $config     = str_replace("'register' => [", "'register' => [\n\t\tApp\PostTypes\\" . $singular . "::class,", $config);
         file_put_contents($configPath, $config);
     }
 }

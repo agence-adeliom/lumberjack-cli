@@ -13,7 +13,7 @@ class DummyEvent extends AbstractEvent
     /**
      * @return string
      */
-    public static function getEvent() : string
+    public static function getEvent(): string
     {
         return "dummy-event";
     }
@@ -21,7 +21,7 @@ class DummyEvent extends AbstractEvent
     /**
      *
      */
-    public static function handle() : void
+    public static function handle(): void
     {
         // TODO: Implement handle() method.
     }

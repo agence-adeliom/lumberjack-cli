@@ -4,6 +4,7 @@ namespace App\PostTypes;
 
 
 use Adeliom\WP\Extensions\PostTypes\Post as BasePost;
+use Closure;
 
 /**
  * Class DummyPostType
@@ -25,7 +26,7 @@ class DummyPostType extends BasePost
      * Overwrite the post slug when a post is saved
      * https://github.com/mindkomm/types#register-post-types
      *
-     * @return \Closure
+     * @return Closure
      */
     protected static function getPostTypeCustomSlug()
     {
@@ -44,16 +45,16 @@ class DummyPostType extends BasePost
     {
         return [
             'name_singular' => __('DummyPostType'),
-            'name_plural'   => __('DummyPlural'),
-            'args'          => [
+            'name_plural' => __('DummyPlural'),
+            'args' => [
                 /**
                  * For a list of possible menu-icons see
                  * https://developer.wordpress.org/resource/dashicons/
                  */
-                'menu_icon'    => null,
+                'menu_icon' => null,
                 'hierarchical' => false,
-                'has_archive'  => true,
-                'supports'     => [
+                'has_archive' => true,
+                'supports' => [
                     'title',
                     'editor',
                     'thumbnail',
@@ -61,7 +62,7 @@ class DummyPostType extends BasePost
                     'revisions',
                 ],
                 // Whether post is accessible in the frontend
-                'public'       => true,
+                'public' => true,
                 'rewrite' => [
                     'slug' => 'dummy-slug',
                 ],

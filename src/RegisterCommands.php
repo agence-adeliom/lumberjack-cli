@@ -10,7 +10,7 @@ class RegisterCommands
 {
     public function bootstrap(Application $app)
     {
-        $config = $app->get(Config::class);
+        $config  = $app->get(Config::class);
         $hatchet = $app->get(CLI::class);
 
         $commands = $config->get('commands', []);
