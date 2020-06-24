@@ -26,25 +26,26 @@ class LayoutMake extends MakeFromStubCommand
         $groupName = $name;
         $name      .= "Layout";
         $key       = Str::kebab($groupName);
+        $twigKey       = Str::snake($groupName);
 
         $stub = file_get_contents(__DIR__ . '/stubs/Layout.stub');
         $stub = str_replace('DummyLayout', $name, $stub);
         $stub = str_replace('Dummy', $groupName, $stub);
-        $stub = str_replace('dummy-key', $key, $stub);
+        $stub = str_replace('dummy-key', $twigKey, $stub);
 
         $stubView = file_get_contents(__DIR__ . '/stubs/Layout.twig.stub');
         $stubView = str_replace('DummyLayout', $name, $stubView);
         $stubView = str_replace('Dummy', $groupName, $stubView);
-        $stubView = str_replace('dummy-key', $key, $stubView);
+        $stubView = str_replace('dummy_key', $twigKey, $stubView);
 
         try {
             $this->createFile('app/FlexibleLayout/' . $name . '.php', $stub);
             $io->success('The Layout  "' . $name . '" was created in file ' . 'app/FlexibleLayout/' . $name . '.php');
 
-            $this->createFile('views/layouts/_' . $key . '.html.twig', $stubView);
-            $io->success('The Layout view "' . $key . '" was created in file ' . 'views/layouts/_' . $key . '.html.twig');
+            $this->createFile('views/layouts/' . $twigKey . '.html.twig', $stubView);
+            $io->success('The Layout view "' . $twigKey . '" was created in file ' . 'views/layouts/' . $twigKey . '.html.twig');
 
-            $this->createFile('resources/sass/components/flexible-contents/includes/_' . $key . '.scss', "");
+            $this->createFile('resources/sass/components/flexible-contents/includes/_' . $key . '.scss', '// resources/sass/components/flexible-contents/includes/_' . $key . '.scss');
             $io->success('The Layout style "' . $key . '" was created in file ' . 'resources/sass/components/flexible-contents/includes/_' . $key . '.scss');
 
             return 1;

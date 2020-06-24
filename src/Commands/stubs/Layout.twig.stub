@@ -1,4 +1,4 @@
-{# views/layouts/dummy-key.html.twig #}
-{% block block_dummy-key %}
-{# The block template #}
-{% endblock %}
+{# views/layouts/dummy_key.html.twig #}
+
+{# The layout template #}
+
