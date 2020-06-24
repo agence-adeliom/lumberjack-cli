@@ -6,6 +6,7 @@ namespace Adeliom\WP\CLI\Commands;
 use Adeliom\WP\CLI\Parser;
 use Exception;
 use ICanBoogie\Inflector;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,7 +28,7 @@ class TaxonomyMake extends MakeFromStubCommand
 
         $singular = $input->getArgument('name');
         $plural   = Inflector::get('en')->pluralize($singular);
-        $name     = Parser::slugify($singular);
+        $name     = Str::slug($singular);
 
         $helper = new QuestionHelper;
 
@@ -47,7 +48,7 @@ class TaxonomyMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Taxonomy/' . $singular . '.php', $stub);
-            $io->success('The Taxonomy "' . $singular . '" was created. - File : ' . 'app/Taxonomy/' . $singular . '.php');
+            $io->success('The Taxonomy "' . $singular . '" was created in file ' . 'app/Taxonomy/' . $singular . '.php');
             if ($registerTaxonomy) {
                 $this->registerTaxonomyInConfig($singular);
                 $io->success('The Taxonomy "' . $singular . '" was registred in config file : ' . $this->app->basePath() . '/config/taxonomies.php');

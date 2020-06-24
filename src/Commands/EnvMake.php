@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -20,7 +21,7 @@ class EnvMake extends MakeFromStubCommand
         $io->title('Create a new environement');
 
         $name = $input->getArgument('name');
-        $name = Parser::slugify($name);
+        $name = Str::snake($name);
 
         $stub = file_get_contents(__DIR__ . '/stubs/environment.stub');
         $stub = str_replace('dummy-env', $name, $stub);

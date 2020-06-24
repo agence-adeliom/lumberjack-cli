@@ -35,7 +35,7 @@ class HookMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Hooks/' . $name . '.php', $stub);
-            $io->success('The Hook Class  "' . $name . '" was created. - File : ' . 'app/Hooks/' . $name . '.php');
+            $io->success('The Hook Class  "' . $name . '" was created in file ' . 'app/Hooks/' . $name . '.php');
             if ($register) {
                 $this->registerHookInConfig($name);
                 $io->success('The Hook Class "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/hooks.php');

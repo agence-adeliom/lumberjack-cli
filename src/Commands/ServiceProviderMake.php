@@ -35,7 +35,7 @@ class ServiceProviderMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Providers/' . $name . '.php', $stub);
-            $io->success('The Providers "' . $name . '" was created. - File : ' . 'app/Providers/' . $name . '.php');
+            $io->success('The Providers "' . $name . '" was created in file ' . 'app/Providers/' . $name . '.php');
             if ($register) {
                 $this->registerServiceProviderInConfig($name);
                 $io->success('The Providers "' . $name . '" was registred in config file : ' . $this->app->basePath() . '/config/app.php');

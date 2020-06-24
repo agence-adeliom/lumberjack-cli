@@ -5,6 +5,7 @@ namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,7 +26,7 @@ class EventMake extends MakeFromStubCommand
         $name = $input->getArgument('name');
         $name = str_replace("Event", "", $name);
 
-        $slug = Parser::slugify($name);
+        $slug = Str::kebab($name);
 
         $name .= "Event";
 
@@ -39,7 +40,7 @@ class EventMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Events/' . $name . '.php', $stub);
-            $io->success('The Event Listener  "' . $name . '" was created. - File : ' . 'app/Events/' . $name . '.php');
+            $io->success('The Event Listener  "' . $name . '" was created in file ' . 'app/Events/' . $name . '.php');
 
             if ($register) {
                 $this->registerEventListenerInConfig($name);

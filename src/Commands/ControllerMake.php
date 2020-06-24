@@ -30,7 +30,7 @@ class ControllerMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Http/Controllers/' . $name . '.php', $stub);
-            $io->success('The Controller  "' . $name . '" was created. - File : ' . 'app/Http/Controllers/' . $name . '.php');
+            $io->success('The Controller  "' . $name . '" was created in file ' . 'app/Http/Controllers/' . $name . '.php');
 
             return 1;
         } catch (Exception $e) {

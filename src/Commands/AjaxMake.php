@@ -5,6 +5,7 @@ namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -31,7 +32,7 @@ class AjaxMake extends MakeFromStubCommand
         $question = new ConfirmationQuestion('<info>Register Ajax Action from Config? (y/n)</info> [default: y] ');
         $register = $helper->ask($input, $output, $question);
 
-        $slug = Parser::slugify($name);
+        $slug = Str::kebab($name);
 
         $stub = file_get_contents(__DIR__ . '/stubs/Action.stub');
         $stub = str_replace('DummyAction', $name, $stub);
@@ -40,7 +41,7 @@ class AjaxMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Actions/' . $name . '.php', $stub);
-            $io->success('The Ajax action  "' . $name . '" was created. - File : ' . 'app/Actions/' . $name . '.php');
+            $io->success('The Ajax action  "' . $name . '" was created in file ' . 'app/Actions/' . $name . '.php');
 
             if ($register) {
                 $this->registerAjaxActionInConfig($name);

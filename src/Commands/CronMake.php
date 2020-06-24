@@ -34,7 +34,7 @@ class CronMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Crons/' . $name . '.php', $stub);
-            $io->success('The Cron Job  "' . $name . '" was created. - File : ' . 'app/Crons/' . $name . '.php');
+            $io->success('The Cron Job  "' . $name . '" was created in file ' . 'app/Crons/' . $name . '.php');
 
             if ($register) {
                 $this->registerCronJobInConfig($name);

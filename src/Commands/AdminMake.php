@@ -30,7 +30,7 @@ class AdminMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Admin/' . $name . '.php', $stub);
-            $io->success('The Admin class "' . $name . '" was created. - File : ' . 'app/Admin/' . $name . '.php');
+            $io->success('The Admin class "' . $name . '" was created in file ' . 'app/Admin/' . $name . '.php');
             return 1;
         } catch (Exception $e) {
             $io->error($e->getMessage());

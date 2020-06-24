@@ -13,6 +13,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Illuminate\Support\Str;
 
 class PostTypeMake extends MakeFromStubCommand
 {
@@ -28,8 +29,8 @@ class PostTypeMake extends MakeFromStubCommand
 
         $singular = $input->getArgument('name');
         $plural   = Inflector::get('en')->pluralize($singular);
-        $name     = Parser::slugify($singular);
-        $slug     = Parser::slugify($singular);
+        $name     = Str::slug($singular);
+        $slug     = Str::slug($singular);
 
         $helper = new QuestionHelper;
 
@@ -83,7 +84,7 @@ class PostTypeMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/PostTypes/' . $singular . '.php', $stub);
-            $io->success('The PostTypes "' . $singular . '" was created. - File : ' . 'app/PostTypes/' . $singular . '.php');
+            $io->success('The PostTypes "' . $singular . '" was created in file ' . 'app/PostTypes/' . $singular . '.php');
             if ($registerPostType) {
                 $this->registerPostTypeInConfig($singular);
                 $io->success('The PostTypes "' . $singular . '" was registred in config file : ' . $this->app->basePath() . '/config/posttypes.php');

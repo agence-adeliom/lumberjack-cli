@@ -28,7 +28,7 @@ class FormMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Forms/' . $name . '.php', $stub);
-            $io->success('The Form  "' . $name . '" was created. - File : ' . 'app/Forms/' . $name . '.php');
+            $io->success('The Form  "' . $name . '" was created in file ' . 'app/Forms/' . $name . '.php');
             return 1;
         } catch (Exception $e) {
             $io->error($e->getMessage());

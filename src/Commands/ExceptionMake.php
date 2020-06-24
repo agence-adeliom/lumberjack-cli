@@ -29,7 +29,7 @@ class ExceptionMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/Exceptions/' . $name . '.php', $stub);
-            $io->success('The Event Listener  "' . $name . '" was created. - File : ' . 'app/Events/' . $name . '.php');
+            $io->success('The Event Listener  "' . $name . '" was created in file ' . 'app/Events/' . $name . '.php');
             return 1;
         } catch (Exception $e) {
             $io->error($e->getMessage());

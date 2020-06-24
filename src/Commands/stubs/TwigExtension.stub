@@ -1,0 +1,31 @@
+<?php
+
+namespace App\TwigExtensions;
+
+use Twig\Extension\AbstractExtension;
+
+/**
+ * Class DummyTwigExtension
+ * @package App\TwigExtensions
+ */
+class DummyTwigExtension extends  AbstractExtension
+{
+    /**
+     * Adds functionality to Twig.
+     *
+     * @param \Twig\Environment $twig The Twig environment.
+     * @return \Twig\Environment
+     */
+    public static function register($twig)
+    {
+        $twig->addFunction( new \Timber\Twig_Function( "DummyTwigExtension" , [__CLASS__, 'handle'] ) );
+
+        return $twig;
+    }
+
+    public static function handle()
+    {
+        echo "DummyTwigExtension";
+    }
+
+}

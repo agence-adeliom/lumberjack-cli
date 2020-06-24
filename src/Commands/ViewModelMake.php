@@ -28,7 +28,7 @@ class ViewModelMake extends MakeFromStubCommand
 
         try {
             $this->createFile('app/ViewModels/' . $name . '.php', $stub);
-            $io->success('The ViewModels "' . $name . '" was created. - File : ' . 'app/ViewModels/' . $name . '.php');
+            $io->success('The ViewModels "' . $name . '" was created in file ' . 'app/ViewModels/' . $name . '.php');
 
             return 1;
         } catch (Exception $e) {

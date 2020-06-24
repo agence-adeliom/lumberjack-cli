@@ -16,6 +16,7 @@ use Adeliom\WP\CLI\Commands\PostTypeMake;
 use Adeliom\WP\CLI\Commands\RouteList;
 use Adeliom\WP\CLI\Commands\ServiceProviderMake;
 use Adeliom\WP\CLI\Commands\TaxonomyMake;
+use Adeliom\WP\CLI\Commands\TwigExtensionMake;
 use Adeliom\WP\CLI\Commands\ViewModelMake;
 use Rareloop\Lumberjack\Application;
 use Rareloop\Lumberjack\Bootstrappers\BootProviders;
@@ -50,7 +51,8 @@ class CLI
         HookMake::class,
         EventMake::class,
         AdminMake::class,
-        LayoutMake::class
+        LayoutMake::class,
+        TwigExtensionMake::class
     ];
     private $app;
 
