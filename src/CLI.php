@@ -4,6 +4,7 @@ namespace Adeliom\WP\CLI;
 
 use Adeliom\WP\CLI\Commands\AdminMake;
 use Adeliom\WP\CLI\Commands\AjaxMake;
+use Adeliom\WP\CLI\Commands\CommandMake;
 use Adeliom\WP\CLI\Commands\ControllerMake;
 use Adeliom\WP\CLI\Commands\CronMake;
 use Adeliom\WP\CLI\Commands\EnvMake;
@@ -52,7 +53,8 @@ class CLI
         EventMake::class,
         AdminMake::class,
         LayoutMake::class,
-        TwigExtensionMake::class
+        TwigExtensionMake::class,
+        CommandMake::class
     ];
     private $app;
 

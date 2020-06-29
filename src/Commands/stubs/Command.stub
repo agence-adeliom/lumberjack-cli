@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Commands;
+
+use Adeliom\WP\CLI\Commands\Command as BaseCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * Class DummyCommand
+ * @package App\Commands
+ */
+class DummyCommand extends BaseCommand
+{
+    protected $signature = 'make:dummy-command';
+
+    protected $description = '';
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+
+        return 0;
+    }
+}
