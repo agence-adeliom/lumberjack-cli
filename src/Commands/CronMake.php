@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,6 +23,7 @@ class CronMake extends MakeFromStubCommand
         $io->title('Create a new Cron Job');
 
         $name = $input->getArgument('name');
+        $name = Str::camel($name);
 
         $helper = new QuestionHelper;
 

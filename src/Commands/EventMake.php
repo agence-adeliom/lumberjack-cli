@@ -24,6 +24,7 @@ class EventMake extends MakeFromStubCommand
         $io->title('Create a new Event Listener');
 
         $name = $input->getArgument('name');
+        $name = Str::camel($name);
         $name = str_replace("Event", "", $name);
 
         $slug = Str::kebab($name);

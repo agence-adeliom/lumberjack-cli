@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -20,6 +21,8 @@ class AdminMake extends MakeFromStubCommand
         $io->title('Create a new Admin class');
 
         $name      = $input->getArgument('name');
+        $name = Str::camel($name);
+
         $name      = str_replace("Admin", "", $name);
         $groupName = $name;
         $name      .= "Admin";

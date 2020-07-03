@@ -24,6 +24,7 @@ class AjaxMake extends MakeFromStubCommand
         $io->title('Create a new Ajax Action');
 
         $name = $input->getArgument('name');
+        $name = Str::camel($name);
         $name = str_replace("Action", "", $name);
         $name .= "Action";
 

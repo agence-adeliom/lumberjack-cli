@@ -22,6 +22,7 @@ class LayoutMake extends MakeFromStubCommand
         $io->title('Create a new Layout');
 
         $name      = $input->getArgument('name');
+        $name = Str::camel($name);
         $name      = str_replace("Layout", "", $name);
         $groupName = $name;
         $name      .= "Layout";

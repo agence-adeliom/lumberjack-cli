@@ -4,6 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -20,6 +21,7 @@ class FormMake extends MakeFromStubCommand
         $io->title('Create a new Form');
 
         $name = $input->getArgument('name');
+        $name = Str::camel($name);
         $name = str_replace("Form", "", $name);
         $name .= "Form";
 
