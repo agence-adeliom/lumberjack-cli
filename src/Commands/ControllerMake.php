@@ -21,7 +21,7 @@ class ControllerMake extends MakeFromStubCommand
         $io->title('Create a new Controller');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("Controller", "", $name);
         $name .= "Controller";
 

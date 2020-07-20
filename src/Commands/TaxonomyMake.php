@@ -27,7 +27,7 @@ class TaxonomyMake extends MakeFromStubCommand
         $io->title('Create a new Taxonomy');
 
         $singular = $input->getArgument('name');
-        $singular = Str::camel($singular);
+        $singular = Str::ucfirst(Str::camel($singular));
         $plural   = Inflector::get('en')->pluralize($singular);
         $name     = Str::slug($singular);
 

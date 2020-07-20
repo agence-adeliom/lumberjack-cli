@@ -21,7 +21,7 @@ class AdminMake extends MakeFromStubCommand
         $io->title('Create a new Admin class');
 
         $name      = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
 
         $name      = str_replace("Admin", "", $name);
         $groupName = $name;

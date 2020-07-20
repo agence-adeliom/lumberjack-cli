@@ -23,7 +23,7 @@ class HookMake extends MakeFromStubCommand
         $io->title('Create a new Hook Class');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("Hooks", "", $name);
         $name .= "Hooks";
 

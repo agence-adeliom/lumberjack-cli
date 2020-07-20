@@ -23,7 +23,7 @@ class CronMake extends MakeFromStubCommand
         $io->title('Create a new Cron Job');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
 
         $helper = new QuestionHelper;
 

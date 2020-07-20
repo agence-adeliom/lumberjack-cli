@@ -21,7 +21,7 @@ class FormMake extends MakeFromStubCommand
         $io->title('Create a new Form');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("Form", "", $name);
         $name .= "Form";
 

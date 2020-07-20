@@ -23,7 +23,7 @@ class TwigExtensionMake extends MakeFromStubCommand
         $io->title('Create a new Twig Extension');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("TwigExtension", "", $name);
         $name .= "TwigExtension";
 

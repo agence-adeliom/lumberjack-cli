@@ -21,7 +21,7 @@ class ExceptionMake extends MakeFromStubCommand
         $io->title('Create a new Exception');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("Exception", "", $name);
         $name .= "Exception";
 

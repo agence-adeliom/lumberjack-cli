@@ -23,7 +23,7 @@ class CommandMake extends MakeFromStubCommand
         $io->title('Create a new command');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
 
         $helper = new QuestionHelper;
 
