@@ -81,6 +81,14 @@ class CLI
         if (class_exists('\Adeliom\WP\Extensions\Extensions')) {
             $this->consoleApp->add($this->app->make('\Adeliom\WP\Extensions\Commands\PublishConfigs'));
         }
+
+        $config  = $this->app->get(Config::class);
+        $commands = $config->get('commands', []);
+
+        foreach ($commands as $command) {
+            $this->consoleApp->add($this->app->make($command));
+        }
+    
     }
 
     public function defaultCommands()
