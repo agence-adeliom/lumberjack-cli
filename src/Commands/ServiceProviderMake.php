@@ -23,7 +23,7 @@ class ServiceProviderMake extends MakeFromStubCommand
         $io->title('Create a new ServiceProvider');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("ServiceProvider", "", $name);
         $name .= "ServiceProvider";
 

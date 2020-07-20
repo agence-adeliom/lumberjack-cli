@@ -28,7 +28,8 @@ class PostTypeMake extends MakeFromStubCommand
         $io->title('Create a new PostType');
 
         $singular = $input->getArgument('name');
-        $singular = Str::camel($singular);
+        $singular = Str::ucfirst(Str::camel($singular));
+
         $plural   = Inflector::get('en')->pluralize($singular);
         $name     = Str::slug($singular);
         $slug     = Str::slug($singular);

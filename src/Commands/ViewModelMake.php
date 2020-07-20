@@ -21,7 +21,7 @@ class ViewModelMake extends MakeFromStubCommand
         $io->title('Create a new ViewModel');
 
         $name = $input->getArgument('name');
-        $name = Str::camel($name);
+        $name = Str::ucfirst(Str::camel($name));
         $name = str_replace("ViewModel", "", $name);
         $name .= "ViewModel";
 
