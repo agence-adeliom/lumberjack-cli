@@ -4,7 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -21,7 +21,8 @@ class AdminMake extends MakeFromStubCommand
         $io->title('Create a new Admin class');
 
         $name      = $input->getArgument('name');
-        $name = Str::ucfirst(Str::camel($name));
+        $converter = new Convert($name);
+        $name = $converter->toPascal();
 
         $name      = str_replace("Admin", "", $name);
         $groupName = $name;

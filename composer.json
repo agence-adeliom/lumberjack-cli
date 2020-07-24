@@ -20,7 +20,8 @@
         "blast/facades": "^1.0",
         "rareloop/lumberjack-core": "^4.3",
         "symfony/console": "^4.1",
-        "icanboogie/inflector": "^2.0"
+        "icanboogie/inflector": "^2.0",
+        "jawira/case-converter": "^3.4"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",

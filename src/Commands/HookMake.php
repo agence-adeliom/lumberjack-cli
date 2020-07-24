@@ -4,7 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +23,8 @@ class HookMake extends MakeFromStubCommand
         $io->title('Create a new Hook Class');
 
         $name = $input->getArgument('name');
-        $name = Str::ucfirst(Str::camel($name));
+        $converter = new Convert($name);
+        $name = $converter->toPascal();
         $name = str_replace("Hooks", "", $name);
         $name .= "Hooks";
 

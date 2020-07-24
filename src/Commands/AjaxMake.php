@@ -5,7 +5,7 @@ namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
 use Exception;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -24,7 +24,8 @@ class AjaxMake extends MakeFromStubCommand
         $io->title('Create a new Ajax Action');
 
         $name = $input->getArgument('name');
-        $name = Str::ucfirst(Str::camel($name));
+        $converter = new Convert($name);
+        $name = $converter->toPascal();
         $name = str_replace("Action", "", $name);
         $name .= "Action";
 
@@ -33,7 +34,7 @@ class AjaxMake extends MakeFromStubCommand
         $question = new ConfirmationQuestion('<info>Register Ajax Action from Config? (y/n)</info> [default: y] ');
         $register = $helper->ask($input, $output, $question);
 
-        $slug = Str::kebab($name);
+        $slug = $converter->toKebab();
 
         $stub = file_get_contents(__DIR__ . '/stubs/Action.stub');
         $stub = str_replace('DummyAction', $name, $stub);

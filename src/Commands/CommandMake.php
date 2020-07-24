@@ -4,7 +4,7 @@
 namespace Adeliom\WP\CLI\Commands;
 
 use Exception;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +23,8 @@ class CommandMake extends MakeFromStubCommand
         $io->title('Create a new command');
 
         $name = $input->getArgument('name');
-        $name = Str::ucfirst(Str::camel($name));
+        $converter = new Convert($name);
+        $name = $converter->toPascal();
 
         $helper = new QuestionHelper;
 
@@ -33,7 +34,7 @@ class CommandMake extends MakeFromStubCommand
         $stub = file_get_contents(__DIR__ . '/stubs/Command.stub');
         $stub = str_replace('DummyCommand', $name, $stub);
 
-        $slug = Str::kebab($name);
+        $slug = $converter->toKebab();
         $stub = str_replace('dummy-command', $slug, $stub);
 
         try {

@@ -5,7 +5,7 @@ namespace Adeliom\WP\CLI\Commands;
 
 use Adeliom\WP\CLI\Parser;
 use Exception;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -22,12 +22,13 @@ class LayoutMake extends MakeFromStubCommand
         $io->title('Create a new Layout');
 
         $name      = $input->getArgument('name');
-        $name = Str::ucfirst(Str::camel($name));
+        $converter = new Convert($name);
+        $name = $converter->toPascal();
         $name      = str_replace("Layout", "", $name);
         $groupName = $name;
         $name      .= "Layout";
-        $key       = Str::kebab($groupName);
-        $twigKey       = Str::snake($groupName);
+        $key       = $converter->toKebab();
+        $twigKey       = $converter->toSnake();
 
         $stub = file_get_contents(__DIR__ . '/stubs/Layout.stub');
         $stub = str_replace('DummyLayout', $name, $stub);

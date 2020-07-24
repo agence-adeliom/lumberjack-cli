@@ -6,7 +6,7 @@ namespace Adeliom\WP\CLI\Commands;
 use Adeliom\WP\CLI\Parser;
 use Exception;
 use ICanBoogie\Inflector;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,7 +27,8 @@ class TaxonomyMake extends MakeFromStubCommand
         $io->title('Create a new Taxonomy');
 
         $singular = $input->getArgument('name');
-        $singular = Str::ucfirst(Str::camel($singular));
+        $converter = new Convert($singular);
+        $singular = $converter->toPascal();
         $plural   = Inflector::get('en')->pluralize($singular);
         $name     = Str::slug($singular);
 

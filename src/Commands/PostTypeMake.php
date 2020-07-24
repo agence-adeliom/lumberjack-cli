@@ -13,7 +13,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 
 class PostTypeMake extends MakeFromStubCommand
 {
@@ -28,11 +28,12 @@ class PostTypeMake extends MakeFromStubCommand
         $io->title('Create a new PostType');
 
         $singular = $input->getArgument('name');
-        $singular = Str::ucfirst(Str::camel($singular));
+        $converter = new Convert($singular);
+        $singular = $converter->toPascal();
 
         $plural   = Inflector::get('en')->pluralize($singular);
-        $name     = Str::slug($singular);
-        $slug     = Str::slug($singular);
+        $name     = $converter->toKebab();
+        $slug     = $converter->toKebab();
 
         $helper = new QuestionHelper;
 
