@@ -26,6 +26,7 @@ use Rareloop\Lumberjack\Bootstrappers\RegisterExceptionHandler;
 use Rareloop\Lumberjack\Bootstrappers\RegisterFacades;
 use Rareloop\Lumberjack\Bootstrappers\RegisterProviders;
 use Symfony\Component\Console\Application as ConsoleApplication;
+use Rareloop\Lumberjack\Config;
 
 class CLI
 {
