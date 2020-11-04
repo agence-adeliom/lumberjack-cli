@@ -47,8 +47,8 @@ class LayoutMake extends MakeFromStubCommand
             $this->createFile('views/layouts/' . $twigKey . '.html.twig', $stubView);
             $io->success('The Layout view "' . $twigKey . '" was created in file ' . 'views/layouts/' . $twigKey . '.html.twig');
 
-            $this->createFile('assets/sass/components/flexible-contents/includes/_' . $key . '.scss', '// assets/sass/components/flexible-contents/includes/_' . $key . '.scss');
-            $io->success('The Layout style "' . $key . '" was created in file ' . 'assets/sass/components/flexible-contents/includes/_' . $key . '.scss');
+            $this->createFile('assets/styles/components/flexible-contents/includes/_' . $key . '.scss', '// assets/styles/components/flexible-contents/includes/_' . $key . '.scss');
+            $io->success('The Layout style "' . $key . '" was created in file ' . 'assets/styles/components/flexible-contents/includes/_' . $key . '.scss');
 
             return 1;
         } catch (Exception $e) {
