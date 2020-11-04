@@ -10,9 +10,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class LayoutMake extends MakeFromStubCommand
+class BlockMake extends MakeFromStubCommand
 {
-    protected $signature = 'make:block {name : The class name of the FlexibleLayout}';
+    protected $signature = 'make:block {name : The class name of the block}';
 
     protected $description = 'Create a Gutenberg block';
 
