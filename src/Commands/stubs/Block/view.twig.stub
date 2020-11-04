@@ -1,0 +1,6 @@
+<p>Block Admin : <em>app/Blocks/DummyLayout.php</em></p>
+<p>Block template : <em>views/blocks/dummy-key.html.twig</em></p>
+<p>Block assets : <br>
+    Scripts : <em>assets/blocks/dummy-key/scripts.js</em>
+    Styles : <em>assets/blocks/dummy-key/styles.scss</em>
+</p>

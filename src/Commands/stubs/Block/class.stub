@@ -1,0 +1,43 @@
+<?php
+
+
+namespace App\Blocks;
+
+
+use Adeliom\WP\Extensions\Blocks\AbstractBlock;
+use WordPlate\Acf\Fields\Text;
+
+class DummyBlock extends AbstractBlock
+{
+    public function __construct()
+    {
+        parent::__construct([
+            'title' => __('Dummy'),
+            'description' => __('Description'),
+            'category' => 'formatting',
+            'post_types' => ['post', 'page'],
+            'icon' => 'book-alt',
+            'mode' => 'auto',
+            'enqueue_assets' => function(){
+                wp_enqueue_style( 'block-dummy-key', mix('blocks/dummy-key/styles.css') );
+                wp_enqueue_script( 'block-dummy-key', mix('blocks/dummy-key/main.js'), array('jquery'), '', true );
+            },
+            // Other valid acf_register_block() settings
+        ]);
+    }
+
+    /**
+     * Make $items available to your template
+     */
+    public function with(): array
+    {
+        return [
+            'name' => get_field('name'),
+        ];
+    }
+
+    protected function registerFields(): \Traversable
+    {
+        yield Text::make('My Name', 'name')->required();
+    }
+}

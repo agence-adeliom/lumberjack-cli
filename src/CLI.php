@@ -3,7 +3,7 @@
 namespace Adeliom\WP\CLI;
 
 use Adeliom\WP\CLI\Commands\AdminMake;
-use Adeliom\WP\CLI\Commands\AjaxMake;
+use Adeliom\WP\CLI\Commands\BlockMake;
 use Adeliom\WP\CLI\Commands\CommandMake;
 use Adeliom\WP\CLI\Commands\ControllerMake;
 use Adeliom\WP\CLI\Commands\CronMake;
@@ -45,7 +45,7 @@ class CLI
         ViewModelMake::class,
         PostTypeMake::class,
         TaxonomyMake::class,
-        AjaxMake::class,
+        BlockMake::class,
         CronMake::class,
         RouteList::class,
         FormMake::class,
