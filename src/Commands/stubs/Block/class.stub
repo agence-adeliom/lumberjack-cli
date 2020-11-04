@@ -20,7 +20,7 @@ class DummyBlock extends AbstractBlock
             'mode' => 'auto',
             'enqueue_assets' => function(){
                 wp_enqueue_style( 'block-dummy-key', mix('blocks/dummy-key/styles.css') );
-                wp_enqueue_script( 'block-dummy-key', mix('blocks/dummy-key/main.js'), array('jquery'), '', true );
+                wp_enqueue_script( 'block-dummy-key', mix('blocks/dummy-key/scripts.js'), array('jquery'), '', true );
             },
             // Other valid acf_register_block() settings
         ]);
