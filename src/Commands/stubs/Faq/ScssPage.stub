@@ -1,0 +1,5 @@
+@import '../../core/helpers/inc';
+
+.page--dummy-page {
+
+}

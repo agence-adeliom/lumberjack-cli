@@ -7,11 +7,14 @@ use Adeliom\WP\Extensions\PostTypes\Post as BasePost;
 use Closure;
 
 /**
- * Class DummyPostType
+ * Class Faq
  * @package App\PostTypes
  */
-class DummyPostType extends BasePost
+class Faq extends BasePost
 {
+
+    const SLUG_REWRITE = "dummy-slug";
+
     /**
      * Return the key used to register the post type with WordPress
      *
@@ -19,7 +22,7 @@ class DummyPostType extends BasePost
      */
     public static function getPostType()
     {
-        return 'dummy-post-name';
+        return 'faq';
     }
 
     /**
@@ -44,52 +47,62 @@ class DummyPostType extends BasePost
     protected static function getPostTypeConfig()
     {
 
-        $labels = array(
+        $labels = [
             // Le nom au pluriel
-            'name' => __('DummyPlural'),
+            'name' => __('Questions'),
             // Le nom au singulier
-            'singular_name' => __('DummyPostType'),
+            'singular_name' => __('Question'),
             // Le libellé affiché dans le menu
-            'menu_name' => __('DummyPostType'),
+            'menu_name' => __('FAQ'),
             // Les différents libellés de l'administration
-            'all_items' => __('Tous les ...'),
-            'view_item' => __('Voir le ...'),
-            'add_new_item' => __('Ajouter un ...'),
+            'all_items' => __('Toutes les questions'),
+            'view_item' => __('Voir la question'),
+            'add_new_item' => __('Ajouter une question'),
             'add_new' => __('Ajouter'),
-            'edit_item' => __('Editer le ...'),
-            'update_item' => __('Modifier le ...'),
-            'search_items' => __('Rechercher un ...'),
-            'not_found' => __('Non trouvé'),
-            'not_found_in_trash' => __('Non trouvé dans la corbeille'),
-        );
+            'edit_item' => __('Editer la question'),
+            'update_item' => __('Modifier la question'),
+            'search_items' => __('Rechercher une question'),
+            'not_found' => __('Non trouvée'),
+            'not_found_in_trash' => __('Non trouvée dans la corbeille'),
+        ];
 
         return [
-            'name_plural' => __('DummyPlural'),
+            'name_plural' => __('Questions'),
             'args' => [
                 /**
                  * For a list of possible menu-icons see
                  * https://developer.wordpress.org/resource/dashicons/
                  */
-                'menu_icon' => null,
+                'menu_icon' => 'dashicons-editor-help',
                 'hierarchical' => false,
-                'has_archive' => true,
+                'has_archive' => false,
                 'supports' => [
                     'title',
-                    'editor',
-                    'thumbnail',
-                    'author',
-                    'revisions',
+                    // 'editor',
+                    //'thumbnail',
+                    //'author',
+                    //'revisions',
                 ],
                 'labels' => $labels,
                 // Whether post is accessible in the frontend
-                'public' => true,
+                'public' => dummy-page,
                 'rewrite' => [
-                    'slug' => 'dummy-slug',
+                    'slug' => self::SLUG_REWRITE,
+                    'with_front' => false
                 ],
             ],
             'admin_columns' => [
                 'date' => false, // Disable date in list view
             ],
         ];
+
     }
+
+    public static function get()
+    {
+        $faq = self::all(-1, 'publish_date', 'DESC');
+        $faq_shuffled = $faq->shuffle();
+        return $faq_shuffled->slice(0, 4);
+    }
+
 }

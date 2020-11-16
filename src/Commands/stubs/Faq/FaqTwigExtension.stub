@@ -1,0 +1,32 @@
+<?php
+
+namespace App\TwigExtensions;
+
+use App\PostTypes\Faq\Question;
+use Twig\Extension\AbstractExtension;
+
+/**
+ * Class BookISBNTwigExtension
+ * @package App\TwigExtensions
+ */
+class DummyLayout extends  AbstractExtension
+{
+    /**
+     * Adds functionality to Twig.
+     *
+     * @param \Twig\Environment $twig The Twig environment.
+     * @return \Twig\Environment
+     */
+    public static function register($twig)
+    {
+        $twig->addFilter( new \Timber\Twig_Filter("getQuestions" , [__CLASS__, 'getQuestions'] ));
+        return $twig;
+    }
+
+    public static function getQuestions($universe = null)
+    {
+        return Question::get();
+    }
+
+}
+

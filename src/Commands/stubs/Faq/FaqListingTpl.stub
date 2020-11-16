@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Template Name: FAQ
+ */
+
+namespace App;
+
+use App\PostTypes\Faq;
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Post;
+use Timber\Timber;
+
+class ListingFaqController
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+        $post = new Post();
+
+        $context['post'] = $post;
+
+        $context['questions'] = Faq::all();
+
+        return new TimberResponse('templates/faq/dummy-file.html.twig', $context);
+    }
+}

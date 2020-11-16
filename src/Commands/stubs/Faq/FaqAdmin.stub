@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Admin;
+
+use App\PostTypes\Faq;
+use Adeliom\WP\Extensions\Admin\AbstractAdmin;
+use Traversable;
+use WordPlate\Acf\Location;
+use WordPlate\Acf\Fields\FlexibleContent;
+use WordPlate\Acf\Fields\Group;
+use WordPlate\Acf\Fields\Text;
+use WordPlate\Acf\Fields\Textarea;
+use WordPlate\Acf\Fields\Taxonomy;
+
+/**
+ * Class FaqAdmin
+ * @package App\Admin
+ */
+class FaqAdmin extends AbstractAdmin
+{
+
+     /**
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+        return Faq::getPostTypeConfig()['args']['labels']['singular_name'];
+    }
+
+    public static function getStyle(): string
+    {
+        return 'default';
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#fields
+     * @return Traversable
+     */
+    public static function getFields(): Traversable
+    {
+
+        yield Text::make(__('Question'), 'question');
+
+        $excerptMaxChars = 280;
+        yield Textarea::make(__('Résumé de réponse'), 'answer')
+        ->instructions(__('Version courte de la réponse, affichée dans les listings et contenus déroulants ('.$excerptMaxChars.' caractères)'))
+        ->wrapper([
+            'width' => 70,
+        ])
+        ->characterLimit($excerptMaxChars)
+        ->required();
+
+        yield Group::make(__("Contenu de la réponse"), 'content')
+        ->fields([
+            FlexibleContent::make(__("Contenus"), "flex_content")
+                ->layouts(PageAdmin::flexibleFields())
+        ]);
+
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#location
+     * @return Traversable
+     */
+    public static function getLocation(): Traversable
+    {
+        yield Location::if('post_type', Faq::getPostType());
+    }
+
+}

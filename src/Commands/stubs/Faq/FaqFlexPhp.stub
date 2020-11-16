@@ -1,0 +1,64 @@
+<?php
+
+namespace App\FlexibleLayout;
+
+use Adeliom\WP\Extensions\FlexibleLayout\AbstractLayout;
+use Traversable;
+use WordPlate\Acf\ConditionalLogic;
+use WordPlate\Acf\Fields\ButtonGroup;
+use WordPlate\Acf\Fields\Group;
+use WordPlate\Acf\Fields\PostObject;
+use WordPlate\Acf\Fields\Relationship;
+use WordPlate\Acf\Fields\Text;
+use WordPlate\Acf\Fields\Textarea;
+use WordPlate\Acf\Fields\Wysiwyg;
+
+/**
+ * Class WysiwygLayout
+ * @see https://github.com/wordplate/extended-acf#fields
+ * @package App\FlexibleLayout
+ */
+class DummyLayout extends AbstractLayout
+{
+
+    /**
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+        return __("Questions associées");
+    }
+
+    /**
+     * @return string|null
+     */
+    public static function getKey()
+    {
+        return 'faq';
+    }
+
+    /**
+     * @return Traversable
+     */
+    public static function getFields(): Traversable
+    {
+
+        yield ButtonGroup::make('Questions', 'filter')
+        ->instructions('Choisir comment remonter les questions')
+        ->choices([
+            'auto' => 'Automatiquement',
+            'manuel' => 'Manuellement'
+        ])
+        ->defaultValue('auto')
+        ->returnFormat('value')
+        ->required();
+
+        yield Relationship::make('Questions', "questions")
+        ->postTypes(['question'])
+        ->conditionalLogic([
+            ConditionalLogic::if('filter')->equals('manuel')
+        ])
+        ->min(0)
+        ->max(4);
+    }
+}

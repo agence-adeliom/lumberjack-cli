@@ -1,0 +1,54 @@
+<?php
+
+namespace App\Admin;
+
+use Adeliom\WP\Extensions\Admin\AbstractAdmin;
+use Traversable;
+use WordPlate\Acf\Fields\Text;
+use WordPlate\Acf\Location;
+use App\PostTypes\Faq;
+
+/**
+ * Class FaqAdmin
+ * @package App\Admin
+ */
+class FaqAdmin extends AbstractAdmin
+{
+
+     /**
+     * @return string
+     */
+    public static function getTitle(): string
+    {
+        return Faq::getPostTypeConfig()['args']['labels']['singular_name'];
+    }
+
+    public static function getStyle(): string
+    {
+        return 'default';
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#fields
+     * @return Traversable
+     */
+    public static function getFields(): Traversable
+    {
+
+        yield Text::make(__('Question'), 'question');
+
+        yield Textarea::make(__('Réponse'), 'answer')
+        ->required();
+
+    }
+
+    /**
+     * @see https://github.com/wordplate/extended-acf#location
+     * @return Traversable
+     */
+    public static function getLocation(): Traversable
+    {
+        yield Location::if('post_type', Faq::getPostType());
+    }
+
+}

@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ mix('/build/styles/dummy-file.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="page page--dummy-classname">
+
+        {{ dump(questions) }}
+
+    </div>
+{% endblock %}

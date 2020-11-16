@@ -1,0 +1,22 @@
+<?php
+
+namespace App;
+
+use App\Http\Controllers\Controller;
+use App\PostTypes\Faq;
+use Rareloop\Lumberjack\Http\Responses\TimberResponse;
+use Rareloop\Lumberjack\Post;
+use Timber\Timber;
+
+class SingleFaqController extends Controller
+{
+    public function handle()
+    {
+        $context = Timber::get_context();
+        $post = new Post();
+
+        $context['post'] = $post;
+
+        return new TimberResponse('templates/faq/dummy-file.html.twig', $context);
+    }
+}

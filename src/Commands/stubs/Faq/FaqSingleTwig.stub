@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ mix('/build/styles/dummy-file.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="page page--dummy-classname">
+
+        <div>Question : {{ post.question ? post.question : post.post_title }}</div>
+        <div>Short answer : {{ post.answer }}</div>
+
+        {% include 'flexible-content/flexible-content.html.twig' with {"boxes" : content.flex_content} %}
+
+    </div>
+{% endblock %}

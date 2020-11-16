@@ -1,0 +1,13 @@
+<section class="w-flex w-flex--faq">
+
+    <div class="container">
+
+        {% if (filter is defined and filter == "auto") %}
+            {% set questions = null|getQuestions %}
+        {% endif %}
+
+        {{ dump(questions) }}
+
+    </div>
+
+</section>
