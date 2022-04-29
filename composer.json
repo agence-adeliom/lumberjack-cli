@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.1|^8.0",
         "blast/facades": "^1.0",
         "rareloop/lumberjack-core": "*",
         "symfony/console": "^4.1",
