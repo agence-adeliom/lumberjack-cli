@@ -6,7 +6,7 @@
         "aritti",
         "adeliom-wp-cli"
     ],
-    "homepage": "https://github.com/adeliom/wp-cli",
+    "homepage": "https://github.com/agence-adeliom/lumberjack-cli",
     "license": "MIT",
     "type": "library",
     "authors": [
