@@ -7,8 +7,7 @@ This is where your description should go. Try and limit it to a paragraph or two
 You can install the package via composer:
 
 ```bash
-composer config repositories.adeliom-wp-cli vcs https://adeliom:93ba9634b50f6531edf61140fba54fe1d7e93fc4@github.com/adeliom/wp-cli
-composer require adeliom/wp-cli
+composer require agence-adeliom/lumberjack-cli
 ```
 
 Once installed you need to copy the `console` file into your Lumberjack theme directory.
