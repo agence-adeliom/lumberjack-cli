@@ -20,12 +20,12 @@
         "php": "^7.1|^8.0",
         "blast/facades": "^1.0",
         "rareloop/lumberjack-core": "*",
-        "symfony/console": "^4.1",
+        "symfony/console": "^5.4",
         "icanboogie/inflector": "^2.0",
         "jawira/case-converter": "^3.4"
     },
     "require-dev": {
-        "orchestra/testbench": "^4.0",
+        "orchestra/testbench": "^5.0",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
@@ -43,6 +43,9 @@
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
